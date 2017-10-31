@@ -1,1 +1,7 @@
 .idea/
+
+bower_components/*
+!bower_components/jquery/
+
+bower_components/jquery/*
+!bower_components/jquery/dist/
