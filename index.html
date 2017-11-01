@@ -35,7 +35,7 @@
 <label for="GET"><input type="radio" name="method" value="GET" id="GET" checked> GET</label>
 <label for="POST"><input type="radio" name="method" value="POST" id="POST"> POST</label>
 <br>
-<input type="text" placeholder="url" id="url" >
+<input type="text" placeholder="url" id="url">
 <br>
 <input type="text" placeholder="content-type" id="contentType" value="application/x-www-form-urlencoded">
 <br>
@@ -49,6 +49,13 @@
 </object>
 
 <script>
+    console.log('For HTTPS');
+    console.log('https://rawgit.com/taluoo/cross-site-data-hijacking/master/src/swfloader.swf');
+    console.log('https://rawgit.com/taluoo/cross-site-data-hijacking/master/src/flashRequest.swf');
+    console.log('For HTTP');
+    console.log('http://oypuiyq41.bkt.clouddn.com/swfloader.swf');
+    console.log('http://oypuiyq41.bkt.clouddn.com/flashRequest.swf');
+
     function flashReady() {
         console.log('flash is ready');
     }
