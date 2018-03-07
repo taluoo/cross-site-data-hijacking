@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="referrer" content="no-referrer">
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <style>
+        input {
+            line-height: 20px;
+            margin-bottom: 10px;
+            padding-left: 10px;
+        }
+
+        input[type=text] {
+            width: 500px;
+        }
+
+        button {
+            line-height: 20px;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+    </style>
+    <title>Document</title>
+</head>
+<body>
+xsf test
+
+<br>
+注意：http or https
+<br>
+target swf url: <input type="text"  id="targetUrl">
+<br>
+<button id="loadTarget">load target swf</button>
+<br>
+
+<object id="swf" data="poc/xsftest.swf" type="" allowscriptaccess="always" width="500" height="500"></object>
+
+<script>
+    $('#loadTarget').click(function () {
+        let url = $('#targetUrl').val();
+        $('#swf').attr('data', `poc/xsftest.swf?swfURL=${url}`)
+    })
+</script>
+
+</body>
+</html>
