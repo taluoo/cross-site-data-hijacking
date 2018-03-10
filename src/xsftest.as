@@ -1,5 +1,6 @@
 package {
 
+import flash.utils.*;
 import flash.display.Loader;
 import flash.display.LoaderInfo;
 import flash.display.Sprite;
@@ -100,11 +101,14 @@ public class xsftest extends Sprite {
 
     private function completeHandler(event: Event): void {
         log("completeHandler: " + event);
-        var loader: Loader = event.currentTarget.loader as Loader;
-        var canAccessChild: Boolean = loader.contentLoaderInfo.childAllowsParent;
-        log('can XSF? ' + canAccessChild);
-        log('actionScriptVersion:' + loader.contentLoaderInfo.actionScriptVersion);
-        log('swfVersion:' + loader.contentLoaderInfo.swfVersion);
+        log("setTimeout: 2s");
+        setTimeout(function (): void { // 延迟判断，因为有的 SWF allowdomain 授权有延迟，例如：https://qzs.qq.com/music/musicbox_v2_1/img/MusicFlash.swf
+            var loader: Loader = event.currentTarget.loader as Loader;
+            var canAccessChild: Boolean = loader.contentLoaderInfo.childAllowsParent;
+            log('can XSF? ' + canAccessChild);
+            log('actionScriptVersion:' + loader.contentLoaderInfo.actionScriptVersion);
+            log('swfVersion:' + loader.contentLoaderInfo.swfVersion);
+        }, 2000);
     }
 
     private function httpStatusHandler(event: HTTPStatusEvent): void {
